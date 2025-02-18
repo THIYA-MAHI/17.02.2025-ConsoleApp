@@ -20,9 +20,18 @@
                 while (true)
                 {
                     Console.Write("Enter Age: ");
-                    if (int.TryParse(Console.ReadLine(), out age) && age > 0)
-                        break;
-                    Console.WriteLine("Invalid input! Please enter a valid age.");
+                    try
+                    {
+                        age = int.Parse(Console.ReadLine());
+                        if (age > 0)
+                            break;
+                        else
+                            Console.WriteLine("Age must be greater than zero. Please enter a valid age.");
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Invalid input! Please enter a valid integer for age.");
+                    }
                 }
 
                 Console.Write("Enter Job Title: ");
@@ -32,9 +41,18 @@
                 while (true)
                 {
                     Console.Write("Enter Salary: ");
-                    if (double.TryParse(Console.ReadLine(), out salary) && salary > 0)
-                        break;
-                    Console.WriteLine("Invalid input! Please enter a valid salary.");
+                    try
+                    {
+                        salary = double.Parse(Console.ReadLine());
+                        if (salary > 0)
+                            break;
+                        else
+                            Console.WriteLine("Salary must be greater than zero. Please enter a valid salary.");
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Invalid input! Please enter a valid number for salary.");
+                    }
                 }
 
                 employees[i] = new employee(name, age, jobTitle, salary);
@@ -46,7 +64,7 @@
 
             foreach (var employee in employees)
             {
-                greetingService.GenerateGreeting(employee); 
+                greetingService.GenerateGreeting(employee);
                 employee.DisplayInfo();
                 Console.WriteLine();
             }
